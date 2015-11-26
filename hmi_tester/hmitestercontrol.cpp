@@ -355,6 +355,7 @@ void HMITesterControl::action_open_triggered()
     bool ok = _processControl->openTestSuite(path.toStdString());
     if (!ok)
     {
+        _settings.endGroup();
         QtUtils::newErrorDialog("The TestSuite cannot be loaded.");
         return;
     }
