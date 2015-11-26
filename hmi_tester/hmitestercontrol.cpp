@@ -35,6 +35,7 @@
 #include <QFile>
 #include <QWindow>
 #include <QDir>
+#include <QFileInfo>
 
 HMITesterControl::HMITesterControl(PreloadingAction *pa, DataModelAdapter *dma, QWidget *parent)
     : QMainWindow(parent)
@@ -341,8 +342,8 @@ void HMITesterControl::action_open_triggered()
 {
     DEBUG(D_GUI,"(HMITesterControl::action_open_triggered)");
     QString lastOpenDir = QDir::homePath();
-    settings_.beginGroup("HMITesterControl");
-    lastOpenDir = settings_.value("lastOpenDir", QDir::homePath()).toString();
+    _settings.beginGroup("HMITesterControl");
+    lastOpenDir = _settings.value("lastOpenDir", QDir::homePath()).toString();
     //ask for the TestSuite
     QString path = "";
     path = QtUtils::openFileDialog("Please, select the file that contains the TestSuite:",
@@ -358,8 +359,9 @@ void HMITesterControl::action_open_triggered()
         return;
     }
 
-    settings_.setValue("lastOpenDir", lastOpenDir);
-    settings_.endGroup();
+    QFileInfo fi(path);
+    _settings.setValue("lastOpenDir", fi.absolutePath());
+    _settings.endGroup();
 
     //reconfigure the GUI
     //form_stopState();

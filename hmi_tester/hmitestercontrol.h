@@ -76,7 +76,7 @@ private:
     QActionGroup *playTestCaseActionGroup_;
     QActionGroup *deleteTestCaseActionGroup_;
     QActionGroup *speedActionGroup_;
-    QSettings settings_;
+    QSettings _settings;
 
 
     QMenu* _playAndDeleteMenu;
