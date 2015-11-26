@@ -96,6 +96,7 @@ void NewTSDialog::on_pb_aut_clicked()
         // check is is a valid binary
         if (!QtUtils::isExecutable(aux))
         {
+            _settings.endGroup();
             QtUtils::newErrorDialog("The file selected is not a valid binary.");
             return;
         }
